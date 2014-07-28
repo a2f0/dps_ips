@@ -1,0 +1,15 @@
+type=SingleWithThreshold
+continue=takenext
+ptype=RegExp
+pattern=.*Built inbound (\w*) connection \d+ for \w+:(\d+\.\d+\.\d+\.\d+)/\d+ \S+ to \w+:(\d+\.\d+\.\d+\.\d+)/(\d+) 
+desc=$1 port $4 denied from $2 to $3
+action=create love33_$1_$2_$3_$4;  add love33_$1_$2_$3_$4 %t; add love33_$1_$2_$3_$4 %s; shellcmd /ds_ips.pl -h $2 $3 $4 $1; delete love33_$1_$2_$3_$4
+window=60
+thresh=5
+
+type=Single
+continue=takenext
+ptype=RegExp
+pattern=.*Deny (\w*) src \w*:(\d+\.\d+\.\d+\.\d+)/(\d+) dst \w*:(\d+\.\d+\.\d+\.\d+)/(\d+)
+desc=$1 port $5 denied from $2 to $3    
+action=shellcmd /bin/echo $1 $2 $3 $4 $5; shellcmd /Users/dps/documents/personal/cspp/ds_ips.pl -d $2 $3 $5 $1

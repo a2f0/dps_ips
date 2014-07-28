@@ -1,0 +1,8 @@
+CREATE TABLE ds_ips (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    lastoccurred DATETIME NOT NULL,
+    sourceip VARCHAR(15) NOT NULL,
+    destinationip VARCHAR(15) NOT NULL,
+    destinationport VARCHAR(5) NOT NULL,
+    protocol VARCHAR(4) NOT NULL
+);
